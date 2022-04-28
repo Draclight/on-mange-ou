@@ -1,0 +1,90 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var name = typeof(Program).Assembly.GetName().Name.Replace(".", "");
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenu sur @name</h1>
+    <p>Vous ne savez pas où manger ? Laissez-vous guider!</p>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <input type="submit" value="Où manger ?" class="btn btn-primary" />
+        </div>
+    </form>
+    @if (Model.Restaurants.Count > 0)
+    {
+        <p>@Html.DisplayNameFor(model => model.Iteration) @Html.DisplayFor(model => model.Iteration)</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Nom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].ParLaFauteDe)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Lieu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Moyenne)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Nb)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Pourcentage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Commentaire)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Restaurants)
+                {
+                    var choix = Model.Restaurants.FirstOrDefault();
+                    <tr class="@(choix == item ? "resto-good" : "")">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParLaFauteDe)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lieu)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Moyenne)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nb)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pourcentage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Commentaire)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
